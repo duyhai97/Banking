@@ -18,24 +18,38 @@ public class ManagerAccount {
         this.accountList = accountList;
     }
 
+    public boolean checkCMND(int id) {
+        for (int i = 0; i < accountList.size(); i++) {
+            if (accountList.get(i).getID() == id) {
+                System.out.println(" Số chứng minh đã đăng kí, Vui lòng nhập lại.");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean checkAccountNumber(int accountNumber) {
+        for (int i = 0; i < accountList.size(); i++) {
+            if (accountList.get(i).getAccountNumber() == accountNumber) {
+                System.out.println(" Số tài  khoản đã đăng kí, Vui lòng nhập lại.");
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void addAccount(){
         Scanner s1 = new Scanner(System.in);
-        System.out.print("Mời nhập số chứng minh nhân dân: ");
-        int id = s1.nextInt();
-        for (Account a: accountList) {
-            if (a.getID() == id){
-                System.out.println("Số chứng minh đã được đăng kí rồi");
-                return;
-            }
-        }
-        System.out.println("Mời nhập số tài khoản: ");
-        int accountNumber = s1.nextInt();
-        for (Account a: accountList) {
-            if (a.getAccountNumber() == accountNumber){
-                System.out.println("Số tài khoản đã được đăng kí rồi");
-                return;
-            }
-        }
+        int id;
+        do {
+            System.out.print("Mời nhập số chứng minh nhân dân: ");
+            id = s1.nextInt();
+        }while (!checkCMND(id));
+       int accountNumber;
+        do {
+            System.out.println("Mời nhập số tài khoản: ");
+             accountNumber = s1.nextInt();
+        } while (!checkAccountNumber(accountNumber));
         System.out.println("Mời nhập tên: ");
         Scanner s2 = new Scanner(System.in);
         String name = s2.nextLine();
@@ -121,30 +135,51 @@ public class ManagerAccount {
         }
     }
 
+    public boolean checkAccountNumber1(int accountNumber) {
+        for (int i = 0; i < accountList.size(); i++) {
+            if (accountList.get(i).getAccountNumber() == accountNumber) {
+                return true;
+            }
+        }
+        System.out.println("Tài khoản không tông tại. vui lòng nhâp lại.");
+        return false;
+    }
+
+
     public void transfers(){
         double rate = 5000;
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Nhập số tài khoản chuyển tiền: ");
-        int account1 = scanner.nextInt();
-        int count1 = 0;
-        int count2 = 0;
-        for (int i = 0; i < accountList.size(); i++) {
-            if (accountList.get(i).getAccountNumber() != account1) count2++;
-        }
-        if (count2 == accountList.size()){
-            System.out.println("Sai thông tin người gửi.");
-            return;
-        }
-        System.out.print("nhập số tài khoản nhận: ");
-        int account2 = scanner.nextInt();
-        for (int i = 0; i < accountList.size(); i++) {
-            if (accountList.get(i).getAccountNumber() != account2) count1++;
-        }
-        if (count1 == accountList.size()){
-            System.out.println("Sai thông tin người nhận.");
-            return;
-        }
-        System.out.println("Nhập số tiền cần chuyển: ");
+//        System.out.print("Nhập số tài khoản chuyển tiền: ");
+        int account1;
+//        int count1 = 0;
+//        int count2 = 0;
+//        for (int i = 0; i < accountList.size(); i++) {
+//            if (accountList.get(i).getAccountNumber() != account1) count2++;
+//        }
+//        if (count2 == accountList.size()){
+//            System.out.println("Sai thông tin người gửi.");
+//            return;
+//        }
+        do {
+            System.out.print("Nhập số tài khoản chuyển tiền: ");
+            account1 = scanner.nextInt();
+        }while (!checkAccountNumber1(account1));
+
+//        System.out.print("nhập số tài khoản nhận: ");
+        int account2;
+//        for (int i = 0; i < accountList.size(); i++) {
+//            if (accountList.get(i).getAccountNumber() != account2) count1++;
+//        }
+//        if (count1 == accountList.size()){
+//            System.out.println("Sai thông tin người nhận.");
+//            return;
+//        }
+        do {
+            System.out.print("nhập số tài khoản nhận: ");
+            account2 = scanner.nextInt();
+        }while (!checkAccountNumber1(account2));
+
+        System.out.print("Nhập số tiền cần chuyển: ");
         double amountOfMoney = scanner.nextDouble();
         for (Account accountA: accountList) {
             if (accountA.getAccountNumber() == account1) {

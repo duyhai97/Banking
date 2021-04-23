@@ -1,3 +1,5 @@
+import java.text.NumberFormat;
+
 public class Account {
     private int ID;
     private int accountNumber;
@@ -20,6 +22,13 @@ public class Account {
                 ", Tên tài khoản: '" + accountName + '\'' +
                 ", Số dư tài khoản: " + amountInAccount ;
     }
+//public String toString() {
+//    // TODO Auto-generated method stub
+//    NumberFormat currencyEN = NumberFormat.getCurrencyInstance();
+//    String str1 = currencyEN.format(amountInAccount);
+//
+//    return ID + "-" + accountNumber + "-" + accountName + "-" + str1;
+//}
 
     public int getID() {
         return ID;

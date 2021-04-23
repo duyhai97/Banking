@@ -31,7 +31,7 @@ public class Main {
                     hai.deleteAccount();
                     break;
                 case 3:
-                    hai.searchByAccountNumber();
+                    hai.showAccount();
                     break;
                 case 4:
                     hai.inputMoney();
